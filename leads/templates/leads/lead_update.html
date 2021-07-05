@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <a href="/leads/">返回到列表</a>
+    <hr/>
+    <h1>编辑一个销售线索Lead:{{ lead.last_name}}{{lead.first_name}}</h1>
+    <Form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button  type="submit">提交</button>
+    </Form>
+</body>
+</html>
