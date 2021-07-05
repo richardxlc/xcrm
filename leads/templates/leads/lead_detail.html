@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .lead{
+            padding-left: 10px;
+            padding-right:10px;
+            padding-top:15px;
+            padding-bottom: 15px;
+            margin-top:10px;
+            background-color: #f6f6f6;
+            width:100%
+        }
+    </style>
+</head>
+<body>
+    <a href="/leads/">返回到列表</a>
+    <hr/>
+    <h1>销售线索详细页面</h1>
+    姓名：{{ lead.last_name}}{{ lead.first_name }}
+    年龄为 :{{ lead.age }}
+</body>
+</html>
