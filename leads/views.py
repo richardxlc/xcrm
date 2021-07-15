@@ -1,10 +1,18 @@
+from django.core.mail import send_mail
 from django.shortcuts import render,redirect,reverse
 from .models import Lead,Agent
 from django.http import HttpResponse
 from django.views import generic
-from .forms import LeadForm,LeadModelForm
+from .forms import LeadForm,LeadModelForm,CustomUserCreationForm
 
 #CRUD Create Retrieve Update Delete  + List
+
+class UserCreationView(generic.CreateView):
+   template_name="registration/signup.html"
+   form_class = CustomUserCreationForm
+
+   def get_success_url(self):
+      return reverse("login")
 
 class LandingPageView(generic.TemplateView):
    template_name="landing.html"
@@ -43,6 +51,16 @@ class LeadCreateView(generic.CreateView):
 
    def get_success_url(self):
       return reverse("leads:lead-list")
+
+   def form_valid(self,form):
+      #todo 发邮件给管理员
+      send_mail(
+         subject="创建了一个新的线索",
+         message="请尽快去查看",
+         from_email="test@test.com",
+         recipient_list=['test1@test.com']
+      )
+      return super(LeadCreateView,self).form_valid(form)
 
 def lead_create(request):
    form = LeadModelForm()
