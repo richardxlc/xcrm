@@ -39,8 +39,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     #第三方的packages
 
+    'crispy_forms',
+    "crispy_tailwind",
+
     #自建的app
-    'leads'
+    'leads',
+    'agents'
 
 ]
 
@@ -136,3 +140,8 @@ AUTH_USER_MODEL = 'leads.user'
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 LOGIN_REDIRECT_URL="/leads/"
+LOGOUT_REDIRECT_URL="/"
+LOGIN_URL = "/login"
+CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"
+
+CRISPY_TEMPLATE_PACK = "tailwind"

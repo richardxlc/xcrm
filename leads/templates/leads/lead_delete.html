@@ -1,11 +1,16 @@
 {% extends "base.html"%}
+{% load tailwind_filters %}
 {% block content %}
+<div class='max-w-lg mx-auto'>
     <a href="{% url 'leads:lead-list' %}">返回到列表</a>
     <hr/>
-    <h1>确定要删除这个线索吗？</h1>
+    <div class="border-t border-gray-200 py-5">
+        <h1 class="text-2xl text-gray-500">确定要删除这个线索吗？</h1>
+    </div>
     <Form method="POST">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button  type="submit">提交</button>
+        {{ form|crispy }}
+        <button class="py-2 px-3 text-white w-full bg-blue-500 hover:bg-blue-600"  type="submit">提交</button>
     </Form>
+</div>
 {% endblock %}

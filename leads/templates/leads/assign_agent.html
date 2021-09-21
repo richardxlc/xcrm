@@ -1,0 +1,11 @@
+{% extends "base.html"%}
+{% block content %}
+    <a href="{% url 'leads:lead-list' %}">返回到列表</a>
+    <hr/>
+    <h1>分配一个代理</h1>
+    <Form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button  type="submit">提交</button>
+    </Form>
+{% endblock %}
