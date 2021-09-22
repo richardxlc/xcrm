@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="text-gray-600 body-font">
+    <div class="container px-5 py-24 mx-auto">
+      <div class="flex flex-col text-center w-full mb-20">
+        <h1 class="sm:text-4xl text-3xl font-medium title-font mb-2 text-gray-900">销售线索类别</h1>
+        <p class="lg:w-2/3 mx-auto leading-relaxed text-base">管理你的销售线索的状态</p>
+        <a href="{% url 'leads:category-create' %}" class="hover:text-blue-500">创建一个新的类别</a>
+      </div>
+      <div class="lg:w-2/3 w-full mx-auto overflow-auto">
+        <table class="table-auto w-full text-left whitespace-no-wrap">
+          <thead>
+            <tr>
+              <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl rounded-bl">名称</th>
+              <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">数量</th>
+              
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="px-4 py-3">未分配类别</td>
+              <td class="px-4 py-3">{{ unassigned_categories }}</td>              
+            </tr>
+            {% for category in category_list %}
+            <tr>
+              <td class="px-4 py-3"><a href="{% url 'leads:category-detail' category.pk %}">{{ category.name}}</a></td>
+              <td class="px-4 py-3">待补充</td>              
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>      
+  </section>
+{% endblock %}

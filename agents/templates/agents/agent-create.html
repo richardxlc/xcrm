@@ -1,0 +1,18 @@
+{% extends "base.html"%}
+{% load tailwind_filters %}
+{% block content %}
+<div class="max-w-lg mx-auto">
+    <a href="{% url 'agents:agent-list' %}">返回到列表</a>
+    <hr/>
+    <div class="border-t border-gray-200 py-3">
+        <h1 class="text-2xl text-gray-800">创建一个销售代理</h1>
+    </div>
+    <Form method="POST">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <div class="py-2 px-3">
+            <button class="w-full bg-blue-500 hover:bg-blue-600 text-white"  type="submit">提交</button>
+        </div>
+    </Form>
+</div>
+{% endblock %}

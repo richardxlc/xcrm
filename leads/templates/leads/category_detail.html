@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="text-gray-600 body-font">
+    <div class="container px-5 py-24 mx-auto">
+      <div class="flex flex-col text-center w-full mb-20">
+        <h1 class="sm:text-4xl text-3xl font-medium title-font mb-2 text-gray-900">{{category.name}}</h1>
+        <p class="lg:w-2/3 mx-auto leading-relaxed text-base">管理你的销售线索的状态</p>
+        <a href="{% url 'leads:category-edit' category.id %}" class="hover:text-blue-500">编辑</a>
+        <a href="{% url 'leads:category-delete' category.id %}" class="hover:text-blue-500">删除</a>
+      </div>
+      <div class="lg:w-2/3 w-full mx-auto overflow-auto">
+        <table class="table-auto w-full text-left whitespace-no-wrap">
+          <thead>
+            <tr>
+              <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl rounded-bl">姓</th>
+              <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">名</th>
+              
+            </tr>
+          </thead>
+          <tbody>           
+            {% for lead in category.leads.all %}
+            <tr>
+              <td class="px-4 py-3"><a href="{% url 'leads:lead-detail' lead.pk %}">{{lead.last_name}}</a></td>
+              <td class="px-4 py-3">{{lead.first_name}}</td>              
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>      
+  </section>
+{% endblock %}
