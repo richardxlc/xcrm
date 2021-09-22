@@ -7,7 +7,7 @@ from django.http import HttpResponse
 from django.views import generic
 from .forms import LeadForm,LeadModelForm,CustomUserCreationForm
 from agents.mixin import OrganizorLoginRequiredMixin
-from .forms import AssignAgentForm,LeadCategoryUpdateForm
+from .forms import AssignAgentForm,LeadCategoryUpdateForm,CategoryModelForm
 #CRUD Create Retrieve Update Delete  + List
 
 def home_page(request):
@@ -277,6 +277,48 @@ class LeadCategoryUpdateView(LoginRequiredMixin,generic.UpdateView):
    def get_success_url(self):
       return reverse("leads:lead-detail",kwargs={"pk":self.get_object().id})
 
+class LeadCategoryCreateView(OrganizorLoginRequiredMixin,generic.CreateView):
+   template_name = "leads/category_create.html"
+   form_class = CategoryModelForm
 
+   def get_success_url(self):
+      return reverse("leads:category-list")
 
+   def form_valid(self,form):
+      category = form.save(commit=False)
+      category.organization = self.request.user.userprofile
+      category.save()
+      
+      return super(LeadCategoryCreateView,self).form_valid(form)
+
+class LeadCategoryEditView(OrganizorLoginRequiredMixin,generic.UpdateView):
+   template_name = "leads/category_edit.html"
+   form_class = CategoryModelForm
+
+   def get_success_url(self):
+      return reverse("leads:category-list")
+
+   
+   def get_queryset(self):
+      user = self.request.user
+      if user.is_organizor:
+         queryset = Category.objects.filter(organization=user.userprofile)
+      else:
+         queryset = Category.objects.filter(organization=user.agent.organization)
+      return queryset
+
+class LeadCategoryDeleteView(OrganizorLoginRequiredMixin,generic.DeleteView):
+   template_name = "leads/category_delete.html"
+
+   def get_success_url(self):
+      return reverse("leads:category-list")
+
+   
+   def get_queryset(self):
+      user = self.request.user
+      if user.is_organizor:
+         queryset = Category.objects.filter(organization=user.userprofile)
+      else:
+         queryset = Category.objects.filter(organization=user.agent.organization)
+      return queryset
 

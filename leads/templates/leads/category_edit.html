@@ -2,10 +2,10 @@
 {% load tailwind_filters %}
 {% block content %}
 <div class="mx-auto max-w-lg">
-    <a class="hover:text-blue-500" href="{% url 'leads:lead-list' %}">返回到列表</a>
+    <a class="hover:text-blue-500" href="{% url 'leads:category-list' %}">返回到列表</a>
     <hr/>
     <div class="py-5 border-t border-gray-200">
-        <h1 class="text-4xl text-gray-800">分配一个代理</h1>
+        <h1 class="text-4xl text-gray-800">编辑{{object.name}}</h1>
     </div>
     <Form method="POST">
         {% csrf_token %}

@@ -13,7 +13,10 @@ from .views import (
     AssignAgentView,
     CatetoryListView,
     CatetoryDetailView,
-    LeadCategoryUpdateView
+    LeadCategoryUpdateView,
+    LeadCategoryCreateView,
+    LeadCategoryEditView,
+    LeadCategoryDeleteView
 )
 
 app_name = "leads"
@@ -26,6 +29,9 @@ urlpatterns = [
     path('<int:pk>/assign-agent/',AssignAgentView.as_view(),name="assign-agent"),
     path('<int:pk>/category-update/',LeadCategoryUpdateView.as_view(),name="category-update"),
     path('create/',LeadCreateView.as_view(),name="lead-create"),
+    path('create-category/',LeadCategoryCreateView.as_view(),name="category-create"),
     path('categories/',CatetoryListView.as_view(),name="category-list"),
     path('<int:pk>/category-detail/',CatetoryDetailView.as_view(),name="category-detail"),
+    path('<int:pk>/category-edit/',LeadCategoryEditView.as_view(),name="category-edit"),
+    path('<int:pk>/category-delete/',LeadCategoryDeleteView.as_view(),name="category-delete"),
 ]
